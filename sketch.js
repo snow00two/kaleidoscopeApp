@@ -53,7 +53,7 @@ let presentGroup;
 let groupList =['Pmm', 'P3mm', 'P4mm', 'P6mm'];
 let figureState;
 let presentFigure;
-let figureList = ['bounceBall', 'bounceBall1', 'floppingTriangle','floppingTriangle1'];
+let figureList = ['bounceBall', 'bounceBall1', 'floppingTriangle1'];
 let colorV0 ;
 let colorV1 ;
 let colorV2 ;
@@ -113,8 +113,9 @@ function setup() {
     selectFigure.option('bouncing balls', 'bounceBall');
     selectFigure.option('bouncing balls 1', 'bounceBall1');
     // selectFigure.option('still triangles', 'stillTriangle');
-    selectFigure.option('flopping triangles', 'floppingTriangle');//
-    selectFigure.option('flopping triangles 1', 'floppingTriangle1');//
+    // selectFigure.option('flopping triangles', 'floppingTriangle');//
+    selectFigure.option('flopping triangles', 'floppingTriangle1');//
+    //selectFigure.option('flopping triangles 2', 'floppingTriangle2');//
     selectFigure.selected('auto');
     selectFigure.position(95, 20);
     selectFigure.changed(resetBackground);
@@ -152,7 +153,7 @@ function setup() {
     } else {
         presentFigure = figureState;
     }
-    [colorV0, colorV1, colorV2, colorV3, colorV4, colorV5, colorV6, colorV7, colorV8] = colorSet(presentGroup, presentFigure);
+    [colorV0, colorV1, colorV2, colorV3, colorV4, colorV5, colorV6, colorV7, colorV8] = colorSet(presentGroup);
 
     varScale = setScale.value();
     varSegment = BASE_SEGMENT * varScale;
@@ -192,7 +193,7 @@ function draw() {
         } else {
             presentFigure  = figureState;
         }
-        [colorV0, colorV1, colorV2,colorV3, colorV4, colorV5, colorV6, colorV7, colorV8] = colorSet(presentGroup, presentFigure);
+        [colorV0, colorV1, colorV2,colorV3, colorV4, colorV5, colorV6, colorV7, colorV8] = colorSet(presentGroup);
 
         xX = groupData(presentGroup, presentFigure, 'x0X');
         xY = groupData(presentGroup, presentFigure, 'x0Y');
@@ -991,7 +992,7 @@ function selectBasePoint(figureName, squareSt, pX, pPX, pY, pPY, qX, qPX, qY, qP
     let sVX;
     let sVY;
     
-    if (figureName === 'floppingTriangle1' && squareSt === false ) {
+    if ((figureName === 'floppingTriangle1') && squareSt === false ) {
         pVX = pPX;
         pVY = pPY;
         qVX = qPX;
@@ -999,7 +1000,7 @@ function selectBasePoint(figureName, squareSt, pX, pPX, pY, pPY, qX, qPX, qY, qP
         rVX = rPX;
         rVY = rPY;
         return [pVX, pVY, qVX, qVY, rVX, rVY];
-    } else if (figureName === 'floppingTriangle1' && squareSt === true ) {
+    } else if ((figureName === 'floppingTriangle1' ) && squareSt === true ) {
         pVX = pPX;
         pVY = pPY;
         qVX = qPX;
@@ -1560,7 +1561,8 @@ function writTri(groupName, figureName, triName){
     pop();
 }
 
-function colorSet (groupName, figureName){
+function colorSet (groupName){
+    let colorScheme = random(['colorSet0', 'colorSet1']); 
     let colorVI0 = FRONT_COLOR_0;
     let colorVI1 = FRONT_COLOR_1;
     let colorVI2 = FRONT_COLOR_2;
@@ -1570,17 +1572,16 @@ function colorSet (groupName, figureName){
     let colorVI6 = FRONT_COLOR_6;
     let colorVI7 = FRONT_COLOR_7;
     let colorVI8 = FRONT_COLOR_8;
-    if (figureName === 'floppingTriangle1'){
+    if (colorScheme === 'colorSet0'){
         colorVI0 = FRONT_COLOR_0;
-        colorVI1 = FRONT_COLOR_0;
-        colorVI2 = FRONT_COLOR_0;
-        colorVI3 = FRONT_COLOR_0;
-        colorVI4 = FRONT_COLOR_0;
-        colorVI5 = FRONT_COLOR_0;
-        colorVI6 = FRONT_COLOR_0;
-        colorVI7 = FRONT_COLOR_0;
-        colorVI8 = FRONT_COLOR_0;
-    } else {
+        colorVI1 = FRONT_COLOR_1;
+        colorVI2 = FRONT_COLOR_2;
+        colorVI3 = FRONT_COLOR_3;
+        colorVI4 = FRONT_COLOR_4;
+        colorVI5 = FRONT_COLOR_5;
+        colorVI6 = FRONT_COLOR_6;
+        colorVI7 = FRONT_COLOR_7;
+        colorVI8 = FRONT_COLOR_8;
         if (groupName === 'P3mm'){
             colorVI3 = FRONT_COLOR_0;
             colorVI4 = FRONT_COLOR_1;
@@ -1593,7 +1594,17 @@ function colorSet (groupName, figureName){
             colorVI1 = FRONT_COLOR_3;
             colorVI2 = FRONT_COLOR_7;
         }
-    }
+    } else if (colorScheme === 'colorSet1' ){
+        colorVI0 = FRONT_COLOR_0;
+        colorVI1 = FRONT_COLOR_0;
+        colorVI2 = FRONT_COLOR_0;
+        colorVI3 = FRONT_COLOR_0;
+        colorVI4 = FRONT_COLOR_0;
+        colorVI5 = FRONT_COLOR_0;
+        colorVI6 = FRONT_COLOR_0;
+        colorVI7 = FRONT_COLOR_0;
+        colorVI8 = FRONT_COLOR_0;
+    } 
     
     return [colorVI0, colorVI1, colorVI2, colorVI3, colorVI4, colorVI5, colorVI6, colorVI7, colorVI8];
 }
@@ -1617,7 +1628,7 @@ function resetBackground() {
     } else {
         presentFigure = figureState;
     }
-    [colorV0, colorV1, colorV2, colorV3, colorV4, colorV5, colorV6, colorV7, colorV8] = colorSet(presentGroup, presentFigure);
+    [colorV0, colorV1, colorV2, colorV3, colorV4, colorV5, colorV6, colorV7, colorV8] = colorSet(presentGroup);
 
     angleB = random(0, 2 * PI);
     angleBP = random(0, 2 * PI);
