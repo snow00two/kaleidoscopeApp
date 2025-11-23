@@ -17,7 +17,10 @@ const FRONT_COLOR_5 = [150, 170, 120];
 const FRONT_COLOR_6 = [100, 185, 0];
 const FRONT_COLOR_7 = [50, 220, 0];
 const FRONT_COLOR_8 = [0, 255, 80];
-const COLOR_LIST = [FRONT_COLOR_0, FRONT_COLOR_1, FRONT_COLOR_2, FRONT_COLOR_3, FRONT_COLOR_4, FRONT_COLOR_5, FRONT_COLOR_6, FRONT_COLOR_7, FRONT_COLOR_8];
+const COLOR_LIST = [FRONT_COLOR_0, FRONT_COLOR_1, FRONT_COLOR_2,FRONT_COLOR_3, 
+    FRONT_COLOR_4, FRONT_COLOR_5, FRONT_COLOR_6, FRONT_COLOR_7, FRONT_COLOR_8];
+const GROUP_LIST =['Pmm', 'P3mm', 'P4mm', 'P6mm'];
+const FIGURE_LIST = ['bounceBall', 'bounceBall1', 'floppingTriangle1'];
 const BASE_SEGMENT = 150;//150
 const SPEED = 0.5;
 const RADIUS1 = 10;
@@ -50,10 +53,8 @@ let selectFigure;
 let stopSwitch;
 let groupState;
 let presentGroup;
-let groupList =['Pmm', 'P3mm', 'P4mm', 'P6mm'];
 let figureState;
 let presentFigure;
-let figureList = ['bounceBall', 'bounceBall1', 'floppingTriangle1'];
 let colorV0 ;
 let colorV1 ;
 let colorV2 ;
@@ -95,7 +96,7 @@ let triS11L;
 let triS12L;
 let triS13L;
 let triS14L;
-let triS16L;
+let triS15L;
 
 function setup() {
     selectGroup = createSelect();
@@ -143,17 +144,18 @@ function setup() {
     //frameRate(0.5);//parameter for test 
     groupState = selectGroup.value();
     if (groupState === 'auto') {
-        presentGroup = random(groupList); //presentGroup is a global varialble
+        presentGroup = random(GROUP_LIST); //presentGroup is a global varialble
     } else {
         presentGroup = groupState;
     }
     figureState = selectFigure.value();
     if (figureState === 'auto') {
-        presentFigure = random(figureList); //presentGroup is a global varialble
+        presentFigure = random(FIGURE_LIST); //presentGroup is a global varialble
     } else {
         presentFigure = figureState;
     }
-    [colorV0, colorV1, colorV2, colorV3, colorV4, colorV5, colorV6, colorV7, colorV8] = colorSet(presentGroup);
+    [colorV0, colorV1, colorV2, colorV3, colorV4, colorV5, colorV6,
+        colorV7, colorV8] = colorSet(presentGroup);
 
     varScale = setScale.value();
     varSegment = BASE_SEGMENT * varScale;
@@ -184,16 +186,17 @@ function draw() {
         k = 0;
         m = 0;
         if (groupState === 'auto'){
-            presentGroup = random(groupList); //presentGroup is a global varialble
+            presentGroup = random(GROUP_LIST); //presentGroup is a global varialble
         } else {
             presentGroup = groupState;
         }
         if (figureState === 'auto'){
-            presentFigure = random(figureList); //presentGroup is a global varialble
+            presentFigure = random(FIGURE_LIST); //presentGroup is a global varialble
         } else {
             presentFigure  = figureState;
         }
-        [colorV0, colorV1, colorV2,colorV3, colorV4, colorV5, colorV6, colorV7, colorV8] = colorSet(presentGroup);
+        [colorV0, colorV1, colorV2,colorV3, colorV4, colorV5, colorV6,
+            colorV7, colorV8] = colorSet(presentGroup);
 
         xX = groupData(presentGroup, presentFigure, 'x0X');
         xY = groupData(presentGroup, presentFigure, 'x0Y');
@@ -248,12 +251,15 @@ function draw() {
         let triS13;
         let triS14;
         let triS15;
-        let triS16;
+        // let triS16;
         
-        let seqTriList0 = [['seqTri4L', 'seqTri4'], ['seqTri5L', 'seqTri5'],['seqTri6L', 'seqTri6'],['seqTri7L', 'seqTri7']];//
-        let seqTriList00 = [['seqTri0L', 'seqTri0'], ['seqTri1L', 'seqTri1'], ['seqTri2L', 'seqTri2'], ['seqTri3L', 'seqTri3']];
+        let seqTriList0 = [['seqTri4L', 'seqTri4'], ['seqTri5L', 'seqTri5'],
+            ['seqTri6L', 'seqTri6'],['seqTri7L', 'seqTri7']];//
+        let seqTriList00 = [['seqTri0L', 'seqTri0'], ['seqTri1L', 'seqTri1'],
+            ['seqTri2L', 'seqTri2'], ['seqTri3L', 'seqTri3']];
         //let seqTriList10 = [['seqTri10L', 'seqTri10'], ['seqTri11L', 'seqTri11'], ['seqTri12L', 'seqTri12'], ['seqTri13L', 'seqTri13']];
-        let seqTriList20 = [['seqTri20L', 'seqTri20'], ['seqTri21L', 'seqTri21'], ['seqTri22L', 'seqTri22'], ['seqTri23L', 'seqTri23']];
+        let seqTriList20 = [['seqTri20L', 'seqTri20'], ['seqTri21L', 'seqTri21'],
+            ['seqTri22L', 'seqTri22'], ['seqTri23L', 'seqTri23']];
 
         if (m === 0) {
             if (presentGroup === 'P3mm' ) {
@@ -269,13 +275,20 @@ function draw() {
         }
 
         if (seqTriL === 6) {//values of 'seqTri*L' : 6, 8, 12, 16
-            seqTri = [triS0L,triS0,triS1L, triS1, triS2L,triS2, triS3L, triS3, triS4L, triS4,triS5L,triS5] = groupData(presentGroup, presentFigure, seqTriName);
+            seqTri = [triS0L, triS0, triS1L, triS1, triS2L, triS2, triS3L, triS3,
+                triS4L, triS4, triS5L, triS5] = groupData(presentGroup, presentFigure, seqTriName);
         } else if (seqTriL === 8) {
-            seqTri = [triS0L,triS0,triS1L, triS1, triS2L,triS2, triS3L, triS3, triS4L, triS4,triS5L,triS5, triS6L, triS6, triS7L,triS7] = groupData(presentGroup, presentFigure, seqTriName);
+            seqTri = [triS0L, triS0, triS1L, triS1, triS2L, triS2, triS3L, triS3,
+                triS4L, triS4, triS5L, triS5, triS6L, triS6, triS7L, triS7] = groupData(presentGroup, presentFigure, seqTriName);
         } else if (seqTriL === 12) {
-            seqTri = [triS0L,triS0,triS1L, triS1, triS2L,triS2, triS3L, triS3, triS4L, triS4,triS5L,triS5, triS6L, triS6, triS7L,triS7, triS8L, triS8, triS9L, triS9, triS10L, triS10, triS11L, triS11] = groupData(presentGroup, presentFigure, seqTriName);
+            seqTri = [triS0L, triS0, triS1L, triS1, triS2L, triS2, triS3L, triS3,
+                triS4L, triS4, triS5L, triS5, triS6L, triS6, triS7L, triS7, triS8L, triS8,
+                triS9L, triS9, triS10L, triS10, triS11L, triS11] = groupData(presentGroup, presentFigure, seqTriName);
         } else if (seqTriL === 16) {
-            seqTri = [triS0L,triS0,triS1L, triS1, triS2L,triS2, triS3L, triS3, triS4L, triS4,triS5L,triS5, triS6L, triS6, triS7L,triS7, triS8L, triS8, triS9L, triS9, triS10L, triS10, triS11L, triS11, triS12L,triS12, triS13L,triS13, triS14L,triS14, triS15L, triS15] = groupData(presentGroup, presentFigure, seqTriName);
+            seqTri = [triS0L, triS0, triS1L, triS1, triS2L,triS2, triS3L, triS3,
+                triS4L, triS4, triS5L,triS5, triS6L, triS6, triS7L, triS7, triS8L,
+                triS8, triS9L, triS9, triS10L, triS10, triS11L, triS11, triS12L,
+                triS12, triS13L, triS13, triS14L,triS14, triS15L, triS15] = groupData(presentGroup, presentFigure, seqTriName);
         }
         
         if (m < seqTriL) {
@@ -932,51 +945,116 @@ function groupData(groupName, figureName, dataName) {
     } else if (dataName === 'tri8') {
         return [p8X, p8Y, q8X, q8Y, r8X, r8Y];
     } else if (dataName === 'seqTri0') {//'P6mm'
-        return [trisL0, ['empty'],trisL0,['tri2'], trisL1, ['tri1','tri2'], trisL2, ['tri0','tri1', 'tri2'], trisL1, ['tri0','tri1'], trisL0, ['tri0']];
+        return [trisL0, ['empty'],trisL0,['tri2'], trisL1, ['tri1','tri2'],
+            trisL2, ['tri0','tri1', 'tri2'], trisL1, ['tri0','tri1'], trisL0, ['tri0']];
     } else if (dataName === 'seqTri0L') {
         return 6;//values of 'seqTri*L' : 6, 8, 12, 16
     } else if (dataName === 'seqTri1') {
-        return [trisL0, ['empty'], trisL0,['tri2'], trisL1, ['tri1','tri2'], trisL2, ['tri0','tri1', 'tri2'], trisL1, ['tri1','tri2'], trisL0, ['tri2']];
+        return [trisL0, ['empty'], trisL0,['tri2'], trisL1, ['tri1','tri2'],
+            trisL2, ['tri0','tri1', 'tri2'], trisL1, ['tri1','tri2'], trisL0, ['tri2']];
     } else if (dataName === 'seqTri1L') {
         return 6;
     } else if (dataName === 'seqTri2') {
-        return [trisL0, ['empty'],trisL0, ['tri0'],  trisL1, ['tri0','tri1'], trisL2, ['tri0','tri1', 'tri2'], trisL1, ['tri1','tri2'], trisL0, ['tri2']];
+        return [trisL0, ['empty'],trisL0, ['tri0'],  trisL1, ['tri0','tri1'],
+            trisL2, ['tri0','tri1', 'tri2'], trisL1, ['tri1','tri2'], trisL0, ['tri2']];
     } else if (dataName === 'seqTri2L') {
         return 6;
     } else if (dataName === 'seqTri3') {
-        return [trisL0, ['empty'],trisL0, ['tri0'],  trisL1, ['tri0','tri1'], trisL2, ['tri0','tri1', 'tri2'], trisL1, ['tri0','tri1'], trisL0, ['tri0']];
+        return [trisL0, ['empty'],trisL0, ['tri0'],  trisL1, ['tri0','tri1'],
+            trisL2, ['tri0','tri1', 'tri2'], trisL1, ['tri0','tri1'], trisL0,
+                ['tri0']];
     } else if (dataName === 'seqTri3L') {
         return 6;
     } else if (dataName === 'seqTri4') {////
-        return [trisL0, ['empty'],trisL0, ['tri3'], trisL1, ['tri3','tri4'], trisL2, ['tri3','tri4', 'tri5'],  trisL3, ['tri3','tri4', 'tri5', 'tri6'], trisL4, ['tri3','tri4', 'tri5', 'tri6', 'tri7'], trisL5, ['tri3','tri4', 'tri5', 'tri6', 'tri7', 'tri8'], trisL4, ['tri3','tri4', 'tri5', 'tri6', 'tri7'], trisL3, ['tri3','tri4', 'tri5', 'tri6'],  trisL2, ['tri3','tri4', 'tri5'], trisL1, ['tri3','tri4'], trisL0, ['tri3']];
+        return [trisL0, ['empty'],trisL0, ['tri3'], trisL1, ['tri3','tri4'],
+            trisL2, ['tri3','tri4', 'tri5'],  trisL3, ['tri3','tri4', 'tri5', 'tri6'],
+                trisL4, ['tri3','tri4', 'tri5', 'tri6', 'tri7'], trisL5, ['tri3','tri4', 'tri5', 'tri6', 'tri7', 'tri8'], trisL4, ['tri3','tri4', 'tri5', 'tri6', 'tri7'], trisL3, ['tri3','tri4', 'tri5', 'tri6'],  trisL2, ['tri3','tri4', 'tri5'], trisL1, ['tri3','tri4'], trisL0, ['tri3']];
     } else if (dataName === 'seqTri4L') {
         return 12;
     } else if (dataName === 'seqTri5') {////
-        return [trisL0, ['empty'],trisL0, ['tri3'], trisL1, ['tri3','tri4'], trisL2, ['tri3','tri4', 'tri5'],  trisL3, ['tri3','tri4', 'tri5', 'tri6'], trisL4, ['tri3','tri4', 'tri5', 'tri6', 'tri7'], trisL5, ['tri3','tri4', 'tri5', 'tri6', 'tri7', 'tri8'], trisL4, ['tri4', 'tri5', 'tri6', 'tri7', 'tri8'], trisL3, ['tri5', 'tri6', 'tri7', 'tri8'],  trisL2, ['tri6', 'tri7', 'tri8'], trisL1, ['tri7', 'tri8'], trisL0, ['tri8']];
+        return [trisL0, ['empty'],trisL0, ['tri3'], trisL1, ['tri3','tri4'],
+            trisL2, ['tri3','tri4', 'tri5'],  trisL3, ['tri3','tri4', 'tri5', 'tri6'],
+            trisL4, ['tri3','tri4', 'tri5', 'tri6', 'tri7'], trisL5,
+            ['tri3','tri4', 'tri5', 'tri6', 'tri7', 'tri8'],
+            trisL4, ['tri4', 'tri5', 'tri6', 'tri7', 'tri8'],
+            trisL3, ['tri5', 'tri6', 'tri7', 'tri8'],  trisL2,
+            ['tri6', 'tri7', 'tri8'], trisL1, ['tri7', 'tri8'], trisL0, ['tri8']];
     } else if (dataName === 'seqTri5L') {
         return 12;
     } else if (dataName === 'seqTri6') {////
-        return [trisL0, ['empty'],trisL0, ['tri8'], trisL1, ['tri7','tri8'], trisL2, ['tri6','tri7', 'tri8'],  trisL3, ['tri5','tri6', 'tri7', 'tri8'], trisL4, ['tri4','tri5', 'tri6', 'tri7', 'tri8'], trisL5, ['tri3','tri4', 'tri5', 'tri6', 'tri7', 'tri8'], trisL4, ['tri4', 'tri5', 'tri6', 'tri7', 'tri8'], trisL3, ['tri5', 'tri6', 'tri7', 'tri8'],  trisL2, ['tri6', 'tri7', 'tri8'], trisL1, ['tri7', 'tri8'], trisL0, ['tri8']];
+        return [trisL0, ['empty'],trisL0, ['tri8'], trisL1, ['tri7','tri8'],
+            trisL2, ['tri6','tri7', 'tri8'],  trisL3, ['tri5','tri6', 'tri7', 'tri8'],
+            trisL4, ['tri4','tri5', 'tri6', 'tri7', 'tri8'], trisL5,
+            ['tri3','tri4', 'tri5', 'tri6', 'tri7', 'tri8'], trisL4,
+            ['tri4', 'tri5', 'tri6', 'tri7', 'tri8'], trisL3,
+            ['tri5', 'tri6', 'tri7', 'tri8'],  trisL2,
+            ['tri6', 'tri7', 'tri8'], trisL1, ['tri7', 'tri8'],
+                                    trisL0, ['tri8']];
     } else if (dataName === 'seqTri6L') {
         return 12;
     } else if (dataName === 'seqTri7') {////
-        return [trisL0, ['empty'],trisL0, ['tri8'], trisL1, ['tri7','tri8'], trisL2, ['tri6','tri7', 'tri8'],  trisL3, ['tri5','tri6', 'tri7', 'tri8'], trisL4, ['tri4','tri5', 'tri6', 'tri7', 'tri8'], trisL5, ['tri3','tri4', 'tri5', 'tri6', 'tri7', 'tri8'], trisL4, ['tri3', 'tri4', 'tri5', 'tri6', 'tri7'], trisL3, ['tri3', 'tri4', 'tri5', 'tri6'],  trisL2, ['tri3', 'tri4', 'tri5'], trisL1, ['tri3', 'tri4'], trisL0, ['tri3']];
+        return [trisL0, ['empty'],trisL0, ['tri8'], trisL1, ['tri7','tri8'],
+            trisL2, ['tri6','tri7', 'tri8'],  trisL3, ['tri5','tri6', 'tri7', 'tri8'],
+            trisL4, ['tri4','tri5', 'tri6', 'tri7', 'tri8'], trisL5,
+            ['tri3','tri4', 'tri5', 'tri6', 'tri7', 'tri8'], trisL4,
+            ['tri3', 'tri4', 'tri5', 'tri6', 'tri7'], trisL3,
+            ['tri3', 'tri4', 'tri5', 'tri6'],  trisL2,
+            ['tri3', 'tri4', 'tri5'], trisL1, ['tri3', 'tri4'], trisL0, ['tri3']];
     } else if (dataName === 'seqTri7L') {
         return 12;
     } else if (dataName === 'seqTri20') {//'Pmm', 'P4mm'
-        return [trisL0, ['empty'],trisL0, ['tri0'], trisL1, ['tri0','tri1'], trisL2, ['tri0','tri1', 'tri2'],  trisL3, ['tri0','tri1', 'tri2', 'tri3'], trisL4, ['tri0','tri1', 'tri2', 'tri3', 'tri4'], trisL5, ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5'], trisL6, ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6'], trisL7, ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6', 'tri7'], trisL6, ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6'], trisL5, ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5'], trisL4, ['tri0','tri1', 'tri2', 'tri3', 'tri4'], trisL3, ['tri0','tri1', 'tri2', 'tri3'],  trisL2, ['tri0','tri1', 'tri2'], trisL1, ['tri0','tri1'], trisL0, ['tri0']];
+        return [trisL0, ['empty'],trisL0, ['tri0'], trisL1, ['tri0','tri1'],
+            trisL2, ['tri0','tri1', 'tri2'],  trisL3, ['tri0','tri1', 'tri2', 'tri3'],
+            trisL4, ['tri0','tri1', 'tri2', 'tri3', 'tri4'], trisL5,
+            ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5'], trisL6,
+            ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6'],
+            trisL7, ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6', 'tri7'],
+            trisL6, ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6'], trisL5,
+            ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5'], trisL4,
+            ['tri0','tri1', 'tri2', 'tri3', 'tri4'], trisL3,
+            ['tri0','tri1', 'tri2', 'tri3'],  trisL2, ['tri0','tri1', 'tri2'],
+            trisL1, ['tri0','tri1'], trisL0, ['tri0']];
     } else if (dataName === 'seqTri20L') {
         return 16;
     } else if (dataName === 'seqTri21') {
-        return [trisL0, ['empty'],trisL0, ['tri0'], trisL1, ['tri0','tri1'], trisL2, ['tri0','tri1', 'tri2'],  trisL3, ['tri0','tri1', 'tri2', 'tri3'], trisL4, ['tri0','tri1', 'tri2', 'tri3', 'tri4'], trisL5, ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5'], trisL6, ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6'], trisL7, ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6', 'tri7'], trisL6, ['tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6', 'tri7'], trisL5, ['tri2', 'tri3', 'tri4', 'tri5', 'tri6','tri7'], trisL4, ['tri3', 'tri4', 'tri5', 'tri6','tri7'], trisL3, ['tri4', 'tri5', 'tri6','tri7'],  trisL2, ['tri5', 'tri6','tri7'], trisL1, ['tri6','tri7'], trisL0, ['tri7']];
+        return [trisL0, ['empty'],trisL0, ['tri0'], trisL1, ['tri0','tri1'],
+            trisL2, ['tri0','tri1', 'tri2'],  trisL3, ['tri0','tri1', 'tri2', 'tri3'],
+            trisL4, ['tri0','tri1', 'tri2', 'tri3', 'tri4'], trisL5,
+            ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5'], trisL6,
+            ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6'], trisL7,
+            ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6', 'tri7'],
+            trisL6, ['tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6', 'tri7'],
+            trisL5, ['tri2', 'tri3', 'tri4', 'tri5', 'tri6','tri7'], trisL4,
+            ['tri3', 'tri4', 'tri5', 'tri6','tri7'], trisL3, ['tri4', 'tri5', 'tri6','tri7'],
+            trisL2, ['tri5', 'tri6','tri7'], trisL1, ['tri6','tri7'], trisL0, ['tri7']];
     } else if (dataName === 'seqTri21L') {
         return 16;
     } else if (dataName === 'seqTri22') {//'Pmm'
-        return [trisL0, ['empty'],trisL0, ['tri7'], trisL1, ['tri6','tri7'], trisL2, ['tri5','tri6', 'tri7'],  trisL3, ['tri4','tri5', 'tri6', 'tri7'], trisL4, ['tri3','tri4', 'tri5', 'tri6', 'tri7'], trisL5, ['tri2','tri3', 'tri4', 'tri5', 'tri6', 'tri7'], trisL6, ['tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6', 'tri7'], trisL7, ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6', 'tri7'], trisL6, ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6'], trisL5, ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5'], trisL4, ['tri0','tri1', 'tri2', 'tri3', 'tri4'], trisL3, ['tri0','tri1', 'tri2', 'tri3'],  trisL2, ['tri0','tri1', 'tri2'], trisL1, ['tri0','tri1'], trisL0, ['tri0']];
+        return [trisL0, ['empty'],trisL0, ['tri7'], trisL1, ['tri6','tri7'],
+            trisL2, ['tri5','tri6', 'tri7'],  trisL3, ['tri4','tri5', 'tri6', 'tri7'],
+            trisL4, ['tri3','tri4', 'tri5', 'tri6', 'tri7'], trisL5,
+            ['tri2','tri3', 'tri4', 'tri5', 'tri6', 'tri7'], trisL6,
+            ['tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6', 'tri7'], trisL7,
+            ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6', 'tri7'],
+            trisL6, ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6'],
+            trisL5, ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5'], trisL4,
+            ['tri0','tri1', 'tri2', 'tri3', 'tri4'], trisL3,
+            ['tri0','tri1', 'tri2', 'tri3'],  trisL2, ['tri0','tri1', 'tri2'],
+            trisL1, ['tri0','tri1'], trisL0, ['tri0']];
     } else if (dataName === 'seqTri22L') {
         return 16;
     } else if (dataName === 'seqTri23') {
-        return [trisL0, ['empty'],trisL0, ['tri7'], trisL1, ['tri6','tri7'], trisL2, ['tri5','tri6', 'tri7'],  trisL3, ['tri4','tri5', 'tri6', 'tri7'], trisL4, ['tri3','tri4', 'tri5', 'tri6', 'tri7'], trisL5, ['tri2','tri3', 'tri4', 'tri5', 'tri6', 'tri7'], trisL6, ['tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6', 'tri7'], trisL7, ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6', 'tri7'], trisL6, ['tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6', 'tri7'], trisL5, ['tri2', 'tri3', 'tri4', 'tri5', 'tri6','tri7'], trisL4, ['tri3', 'tri4', 'tri5', 'tri6','tri7'], trisL3, ['tri4', 'tri5', 'tri6','tri7'],  trisL2, ['tri5', 'tri6','tri7'], trisL1, ['tri6','tri7'], trisL0, ['tri7']];
+        return [trisL0, ['empty'],trisL0, ['tri7'], trisL1, ['tri6','tri7'],
+        trisL2, ['tri5','tri6', 'tri7'],  trisL3, ['tri4','tri5', 'tri6', 'tri7'],
+        trisL4, ['tri3','tri4', 'tri5', 'tri6', 'tri7'], trisL5,
+        ['tri2','tri3', 'tri4', 'tri5', 'tri6', 'tri7'], trisL6,
+        ['tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6', 'tri7'], trisL7,
+        ['tri0','tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6', 'tri7'],
+        trisL6, ['tri1', 'tri2', 'tri3', 'tri4', 'tri5', 'tri6', 'tri7'],
+        trisL5, ['tri2', 'tri3', 'tri4', 'tri5', 'tri6','tri7'],
+        trisL4, ['tri3', 'tri4', 'tri5', 'tri6','tri7'], trisL3,
+        ['tri4', 'tri5', 'tri6','tri7'],  trisL2, ['tri5', 'tri6','tri7'],
+        trisL1, ['tri6','tri7'], trisL0, ['tri7']];
     } else if (dataName === 'seqTri23L') {
         return 16;
     } 
@@ -1619,12 +1697,12 @@ function resetBackground() {
     varSpeed = SPEED * varScale;
     varRadius = RADIUS1 * varScale;
     if (groupState === 'auto') {
-        presentGroup = random(groupList); //presentGroup is a global varialble
+        presentGroup = random(GROUP_LIST); //presentGroup is a global varialble
     } else {
         presentGroup = groupState;
     }
     if (figureState === 'auto') {
-        presentFigure = random(figureList); //presentGroup is a global varialble
+        presentFigure = random(FIGURE_LIST); //presentGroup is a global varialble
     } else {
         presentFigure = figureState;
     }
