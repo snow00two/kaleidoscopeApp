@@ -2,10 +2,10 @@
 * 2026/02/18 version 0.2, snow00two, 
 * \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\ccbyncsa}
 */
-const WIDTH_CANVAS = 720 * 3 / 2; //=1080　similar to infty 
-const HEIGHT_CANVAS = 405 * 3 / 2; //=607.5 similar to infty
-const CENTER_X = WIDTH_CANVAS / 2;
-const CENTER_Y = HEIGHT_CANVAS / 2;
+let WIDTH_CANVAS = 720 * 3 / 2; //=1080　similar to infty 
+let HEIGHT_CANVAS = 405 * 3 / 2; //=607.5 similar to infty
+let CENTER_X = WIDTH_CANVAS / 2;
+let CENTER_Y = HEIGHT_CANVAS / 2;
 const BACK_COLOR = 255;//
 const FRONT_COLOR_0 = [255,  0, 0];
 const FRONT_COLOR_1 = [220, 50, 0];
@@ -20,13 +20,14 @@ const COLOR_LIST = [FRONT_COLOR_0, FRONT_COLOR_1, FRONT_COLOR_2,FRONT_COLOR_3,
     FRONT_COLOR_4, FRONT_COLOR_5, FRONT_COLOR_6, FRONT_COLOR_7, FRONT_COLOR_8];
 const GROUP_LIST =['Pmm', 'P3mm', 'P4mm', 'P6mm'];
 const FIGURE_LIST = ['bounceBall', 'bounceBall1', 'floppingTriangle1'];
-const BASE_SEGMENT = 150;//150
+let BASE_SEGMENT = 150;//150
 const SPEED = 0.5;
 const RADIUS1 = 10;
 const FLOP_PRIOD = 150; //200
 const SELECT_PRIOD = 25 * FLOP_PRIOD;
 
 let varScale;
+let scaleCanvas = HEIGHT_CANVAS;
 let varSegment;
 let varHeight;
 let varSpeed;
@@ -98,6 +99,12 @@ let triS14L;
 let triS15L;
 
 function setup() {
+    WIDTH_CANVAS = windowWidth ;
+    HEIGHT_CANVAS = windowHeight ;
+    CENTER_X = windowWidth / 2;
+    CENTER_Y = windowHeight / 2;
+    scaleCanvas = min(WIDTH_CANVAS, HEIGHT_CANVAS);
+    BASE_SEGMENT = scaleCanvas / 5;
     selectGroup = createSelect();
     selectGroup.option('auto', 'auto');
     selectGroup.option('Pmm', 'Pmm');
