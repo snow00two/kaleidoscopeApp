@@ -2,10 +2,10 @@
 * 2026/02/18 version 0.2, snow00two, 
 * \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\ccbyncsa}
 */
-let WIDTH_CANVAS = 720 * 3 / 2; //=1080　similar to infty 
-let HEIGHT_CANVAS = 405 * 3 / 2; //=607.5 similar to infty
-let CENTER_X = WIDTH_CANVAS / 2;
-let CENTER_Y = HEIGHT_CANVAS / 2;
+let widthCanvas = 720 * 3 / 2; //=1080　similar to infty 
+let heightCanvas = 405 * 3 / 2; //=607.5 similar to infty
+let centerX = widthCanvas / 2;
+let centerY = heightCanvas / 2;
 const BACK_COLOR = 255;//
 const FRONT_COLOR_0 = [255,  0, 0];
 const FRONT_COLOR_1 = [220, 50, 0];
@@ -20,14 +20,14 @@ const COLOR_LIST = [FRONT_COLOR_0, FRONT_COLOR_1, FRONT_COLOR_2,FRONT_COLOR_3,
     FRONT_COLOR_4, FRONT_COLOR_5, FRONT_COLOR_6, FRONT_COLOR_7, FRONT_COLOR_8];
 const GROUP_LIST =['Pmm', 'P3mm', 'P4mm', 'P6mm'];
 const FIGURE_LIST = ['bounceBall', 'bounceBall1', 'floppingTriangle1'];
-let BASE_SEGMENT = 150;//150
+let baseSegment = 150;//150
 const SPEED = 0.5;
 const RADIUS1 = 10;
 const FLOP_PRIOD = 150; //200
 const SELECT_PRIOD = 25 * FLOP_PRIOD;
 
 let varScale;
-let scaleCanvas = HEIGHT_CANVAS;
+let scaleCanvas = heightCanvas;
 let varSegment;
 let varHeight;
 let varSpeed;
@@ -99,12 +99,12 @@ let triS14L;
 let triS15L;
 
 function setup() {
-    WIDTH_CANVAS = windowWidth ;
-    HEIGHT_CANVAS = windowHeight ;
-    CENTER_X = windowWidth / 2;
-    CENTER_Y = windowHeight / 2;
-    scaleCanvas = min(WIDTH_CANVAS, HEIGHT_CANVAS);
-    BASE_SEGMENT = scaleCanvas / 5;
+    widthCanvas = windowWidth ;
+    heightCanvas = windowHeight ;
+    centerX = windowWidth / 2;
+    centerY = windowHeight / 2;
+    scaleCanvas = min(widthCanvas, heightCanvas);
+    baseSegment = scaleCanvas / 5;
     selectGroup = createSelect();
     selectGroup.option('auto', 'auto');
     selectGroup.option('Pmm', 'Pmm');
@@ -164,7 +164,7 @@ function setup() {
         colorV7, colorV8] = colorSet(presentGroup);
 
     varScale = setScale.value();
-    varSegment = BASE_SEGMENT * varScale;
+    varSegment = baseSegment * varScale;
     varHeight = sqrt(3) * varSegment / 2;
     varSpeed = SPEED * varScale;
     varRadius = RADIUS1 * varScale;
@@ -180,7 +180,7 @@ function setup() {
     // xPX = groupData(presentGroup, presentFigure, 'xP0X');
     // xPY = groupData(presentGroup, presentFigure, 'xP0Y');
 
-    createCanvas(WIDTH_CANVAS, HEIGHT_CANVAS);
+    createCanvas(widthCanvas, heightCanvas);
     background(BACK_COLOR);   
 }
 
@@ -218,9 +218,9 @@ function draw() {
         k++;
     }
     if (presentGroup === 'Pm') {
-        translate(CENTER_X, -HEIGHT_CANVAS / 6);//the center of scaling
+        translate(centerX, -heightCanvas / 6);//the center of scaling
     } else {
-        translate(CENTER_X, CENTER_Y);//the center of scaling
+        translate(centerX, centerY);//the center of scaling
     }
     let num = 4;
     let radB1 = groupData(presentGroup, presentFigure, 'radB1');
@@ -487,8 +487,8 @@ function groupData(groupName, figureName, dataName) {
         rpNY = sin(5 * PI / 6);
         denomiNator = 3;
         mirState = true;
-        firstDelimiter = floor(WIDTH_CANVAS / varSegment);
-        secondDelimiter = floor(WIDTH_CANVAS / varSegment);
+        firstDelimiter = floor(widthCanvas / varSegment);
+        secondDelimiter = floor(widthCanvas / varSegment);
         basicVector0X = 3 * varSegment / 2;
         basicVector0Y = varHeight;
         basicVector1X = 0;
@@ -593,8 +593,8 @@ function groupData(groupName, figureName, dataName) {
         rpNY = sin(3 * PI / 4);
         denomiNator = 4;
         mirState = true;
-        firstDelimiter = floor(WIDTH_CANVAS / varHeight);
-        secondDelimiter = floor(WIDTH_CANVAS / varHeight);
+        firstDelimiter = floor(widthCanvas / varHeight);
+        secondDelimiter = floor(widthCanvas / varHeight);
         basicVector0X = 2 * varHeight;
         basicVector0Y = 0;
         basicVector1X = 0;
@@ -696,8 +696,8 @@ function groupData(groupName, figureName, dataName) {
         // qSign = -1 ;
         denomiNator = 6;
         mirState = true;
-        firstDelimiter = floor(WIDTH_CANVAS / varSegment);
-        secondDelimiter = floor(WIDTH_CANVAS / varSegment);
+        firstDelimiter = floor(widthCanvas / varSegment);
+        secondDelimiter = floor(widthCanvas / varSegment);
         basicVector0X = 2 * varHeight;
         basicVector0Y = 0;
         basicVector1X = varHeight;
@@ -766,8 +766,8 @@ function groupData(groupName, figureName, dataName) {
         spNY = sin(PI);
         denomiNator = 2;
         mirState = true;
-        firstDelimiter = floor(WIDTH_CANVAS / varSegment);
-        secondDelimiter = floor(2 * WIDTH_CANVAS / varSegment);
+        firstDelimiter = floor(widthCanvas / varSegment);
+        secondDelimiter = floor(2 * widthCanvas / varSegment);
         basicVector0X = 2 * varSegment;
         basicVector0Y = 0;
         basicVector1X = 0;
@@ -1698,7 +1698,7 @@ function resetBackground() {
     groupState = selectGroup.value();//we need this definition here.
     figureState = selectFigure.value();
     varScale = setScale.value();
-    varSegment = BASE_SEGMENT * varScale;
+    varSegment = baseSegment * varScale;
     varHeight = sqrt(3) * varSegment / 2;
     varSpeed = SPEED * varScale;
     varRadius = RADIUS1 * varScale;
