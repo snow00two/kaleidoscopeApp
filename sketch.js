@@ -18,7 +18,7 @@ const FRONT_COLOR_7 = [50, 220, 0];
 const FRONT_COLOR_8 = [0, 255, 80];
 const COLOR_LIST = [FRONT_COLOR_0, FRONT_COLOR_1, FRONT_COLOR_2,FRONT_COLOR_3, 
     FRONT_COLOR_4, FRONT_COLOR_5, FRONT_COLOR_6, FRONT_COLOR_7, FRONT_COLOR_8];
-const GROUP_LIST =['Pmm', 'P3mm', 'P4mm', 'P6mm'];
+const GROUP_LIST =['D8','Pmm', 'P3mm', 'P4mm', 'P6mm'];
 const FIGURE_LIST = ['bounceBall', 'bounceBall1', 'floppingTriangle1'];
 let baseSegment = 150;//150
 const SPEED = 0.5;
@@ -107,6 +107,7 @@ function setup() {
     baseSegment = scaleCanvas / 5;
     selectGroup = createSelect();
     selectGroup.option('auto', 'auto');
+    selectGroup.option('D8', 'D8') ;//We cannot apply our algorithm for 'D7'. 
     selectGroup.option('Pmm', 'Pmm');
     selectGroup.option('P3mm', 'P3mm');
     selectGroup.option('P4mm', 'P4mm');
@@ -201,6 +202,10 @@ function draw() {
         } else {
             presentFigure  = figureState;
         }
+        if (presentGroup === 'D8') {
+            presentFigure  = 'bounceBall1';//We cannot use "floppingtriangles1" in "D8".
+        }
+   
         [colorV0, colorV1, colorV2,colorV3, colorV4, colorV5, colorV6,
             colorV7, colorV8] = colorSet(presentGroup);
 
@@ -848,6 +853,37 @@ function groupData(groupName, figureName, dataName) {
         q7Y = pVY;
         r7X = cX;
         r7Y = cY;
+    }  else if (groupName === 'D8') {
+        denomiNator = 8;
+        mirState = true;
+        firstDelimiter = 1;
+        secondDelimiter = 1;
+
+        radB1 = varRadius;
+        radB2 = varRadius;
+        x0X = 4 * varHeight / 3;
+        x0Y = varSegment / 3;
+        xP0X = 4 * varHeight / 3 + 3 * radB2;
+        xP0Y = varSegment / 3;
+        pX = 0;
+        pY = 0;
+        qX = scaleCanvas/3;
+        qY = 0;
+        rX = scaleCanvas/3;
+        rY = tan(PI /denomiNator)*scaleCanvas/3;
+        pqNX = cos(-PI / 2);
+        pqNY = sin(-PI / 2);
+        qrNX = cos(0);
+        qrNY = sin(0);
+        rpNX = cos(5 * PI / denomiNator);
+        rpNY = sin(5 * PI / denomiNator);
+     
+        pPX = 0.8 * varHeight;
+        pPY = baseSegment / 10;
+        qPX = 2 * varHeight;
+        qPY = baseSegment / 10;
+        rPX = 2 * varHeight;
+        rPY = baseSegment / 2;
     }
 
     if (dataName === 'varSmall') {
