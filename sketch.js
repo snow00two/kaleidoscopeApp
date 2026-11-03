@@ -7,6 +7,7 @@ let heightCanvas = 405 * 3 / 2; //=607.5 similar to infty
 let centerX = widthCanvas / 2;
 let centerY = heightCanvas / 2;
 const BACK_COLOR = 255;//
+const BACK_COLOR_1 = 0;
 const FRONT_COLOR_0 = [255,  0, 0];
 const FRONT_COLOR_1 = [220, 50, 0];
 const FRONT_COLOR_2 = [185, 100, 0];
@@ -182,7 +183,7 @@ function setup() {
     // xPY = groupData(presentGroup, presentFigure, 'xP0Y');
 
     createCanvas(widthCanvas, heightCanvas);
-    background(BACK_COLOR);   
+    background(BACK_COLOR);
 }
 
 function draw() {
@@ -231,7 +232,7 @@ function draw() {
     let radB1 = groupData(presentGroup, presentFigure, 'radB1');
     let radB2 = groupData(presentGroup, presentFigure, 'radB2');
 
-    background(BACK_COLOR);
+    background(BACK_COLOR_1);
     if (presentFigure === 'bounceBall') {
         [xX, xY, uX, uY] = trajectoryBB(stopState, radB1, presentGroup, presentFigure, num, xX, xY, uX, uY);
         num = 2;
