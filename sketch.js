@@ -203,9 +203,9 @@ function draw() {
         } else {
             presentFigure  = figureState;
         }
-        if (presentGroup === 'D8') {
-            presentFigure  = 'bounceBall1';//We cannot use "floppingtriangles1" in "D8".
-        }
+        // if (presentGroup === 'D8') {
+        //     presentFigure  = 'bounceBall1';//We cannot use "floppingtriangles1" in "D8".
+        // }
    
         [colorV0, colorV1, colorV2,colorV3, colorV4, colorV5, colorV6,
             colorV7, colorV8] = colorSet(presentGroup);
@@ -269,7 +269,7 @@ function draw() {
             ['seqTri6L', 'seqTri6'],['seqTri7L', 'seqTri7']];//
         let seqTriList00 = [['seqTri0L', 'seqTri0'], ['seqTri1L', 'seqTri1'],
             ['seqTri2L', 'seqTri2'], ['seqTri3L', 'seqTri3']];
-        //let seqTriList10 = [['seqTri10L', 'seqTri10'], ['seqTri11L', 'seqTri11'], ['seqTri12L', 'seqTri12'], ['seqTri13L', 'seqTri13']];
+        let seqTriList10 = [['seqTri10L', 'seqTri10'], ['seqTri11L', 'seqTri11'], ['seqTri12L', 'seqTri12'], ['seqTri13L', 'seqTri13']];
         let seqTriList20 = [['seqTri20L', 'seqTri20'], ['seqTri21L', 'seqTri21'],
             ['seqTri22L', 'seqTri22'], ['seqTri23L', 'seqTri23']];
 
@@ -280,8 +280,8 @@ function draw() {
                 [seqTriNameL, seqTriName] = random(seqTriList00);
             } else if (presentGroup === 'P4mm' || presentGroup === 'Pmm' ) {
                 [seqTriNameL, seqTriName] = random(seqTriList20);
-            }  else  {
-                ;
+            }  else if (presentGroup === 'D8') {
+                [seqTriNameL, seqTriName] = random(seqTriList10);//seqTriList10
             }
             seqTriL = groupData(presentGroup, presentFigure, seqTriNameL);
         }
@@ -628,6 +628,7 @@ function groupData(groupName, figureName, dataName) {
         vY = (qVY + rVY) / 2;
         wX = (rVX + cX) / 2;
         wY = (rVY + cY) / 2;
+        //data of tri0 //
         p0X = pVX;
         p0Y = pVY;
         q0X = tX;
@@ -859,6 +860,10 @@ function groupData(groupName, figureName, dataName) {
         mirState = true;
         firstDelimiter = 1;
         secondDelimiter = 1;
+        let mRadD8 = scaleCanvas/3;
+        let angD8 = PI / denomiNator;
+        let radD8 = mRadD8/cos(angD8);
+        let margiN = mRadD8/50;
 
         radB1 = varRadius;
         radB2 = varRadius;
@@ -868,16 +873,16 @@ function groupData(groupName, figureName, dataName) {
         xP0Y = varSegment / 3;
         pX = 0;
         pY = 0;
-        qX = scaleCanvas/3;
+        qX = mRadD8;
         qY = 0;
-        rX = scaleCanvas/3;
-        rY = tan(PI /denomiNator)*scaleCanvas/3;
+        rX = mRadD8;
+        rY = tan(angD8)*mRadD8;
         pqNX = cos(-PI / 2);
         pqNY = sin(-PI / 2);
         qrNX = cos(0);
         qrNY = sin(0);
-        rpNX = cos(5 * PI / denomiNator);
-        rpNY = sin(5 * PI / denomiNator);
+        rpNX = cos(5 * angD8);
+        rpNY = sin(5 * angD8);
      
         pPX = 0.8 * varHeight;
         pPY = baseSegment / 10;
@@ -885,6 +890,38 @@ function groupData(groupName, figureName, dataName) {
         qPY = baseSegment / 10;
         rPX = 2 * varHeight;
         rPY = baseSegment / 2;
+
+        //data of flopping Triangles
+        let lengthA = radD8 * sin(angD8);
+        let lengthB = lengthA * sqrt(2);
+        //data of tri0 //
+        p0X = margiN/tan(PI/16);
+        p0Y = margiN;
+        q0X = lengthA - margiN;
+        q0Y = margiN;
+        r0X = lengthA - margiN;
+        r0Y = lengthB - lengthA - margiN/tan(3*PI/16);
+        //data of tri1 
+        p1X = lengthA + margiN;
+        p1Y = lengthB - lengthA - margiN/tan(PI/8);
+        q1X = lengthA + margiN;
+        q1Y = 0+ margiN;
+        r1X = lengthB - margiN/tan(PI/8);
+        r1Y = 0 + margiN;
+        //data of tri2 
+        p2X = lengthA + cos(-PI/16)*margiN/sin(PI/8);
+        p2Y = lengthB - lengthA + sin(-PI/16)*margiN/sin(PI/8);
+        q2X = lengthB;
+        q2Y = 0+sqrt(2)*margiN ;
+        r2X = lengthA + lengthB + cos(-13*PI/16)*margiN/sin(PI/16);
+        r2Y = lengthA + sin(-13*PI/16)*margiN/sin(PI/16);
+        //data of tri3
+        p3X = lengthB + margiN/tan(PI/8);
+        p3Y = 0 + margiN;
+        q3X = lengthA + lengthB - margiN;
+        q3Y = 0 +  margiN;
+        r3X = lengthA + lengthB + cos(-5*PI/8)*margiN/sin(PI/8);
+        r3Y = lengthA + sin(-5*PI/8)*margiN/sin(PI/8);
     }
 
     if (dataName === 'varSmall') {
@@ -1045,6 +1082,31 @@ function groupData(groupName, figureName, dataName) {
             ['tri3', 'tri4', 'tri5'], trisL1, ['tri3', 'tri4'], trisL0, ['tri3']];
     } else if (dataName === 'seqTri7L') {
         return 12;
+    } else if (dataName === 'seqTri10'){
+           return [trisL0, ['empty'],trisL0, ['tri0'],  trisL1, ['tri0','tri1'],
+            trisL2, ['tri0','tri1', 'tri2'], trisL3, ['tri0','tri1', 'tri2', 'tri3'], trisL2, ['tri0','tri1', 'tri2'], trisL1, ['tri0','tri1'], trisL0,
+                ['tri0']];
+    } else if (dataName === 'seqTri10L') {
+        return 8;
+    } else if (dataName === 'seqTri11'){
+           return [trisL0, ['empty'],trisL0, ['tri0'],  trisL1, ['tri0','tri1'],
+            trisL2, ['tri0','tri1', 'tri2'], trisL3, ['tri0','tri1', 'tri2', 'tri3'], trisL2, ['tri1', 'tri2','tri3',], trisL1, ['tri2','tri3',], trisL0,
+                ['tri3']];
+    } else if (dataName === 'seqTri11L') {
+        return 8;
+    } else if (dataName === 'seqTri12'){
+           return [trisL0, ['empty'],trisL0, ['tri3'],  trisL1, ['tri3','tri2'],
+            trisL2, ['tri3','tri2', 'tri1'], trisL3, ['tri3','tri2', 'tri1', 'tri0'], trisL2, ['tri3', 'tri2','tri1',], trisL1, ['tri3','tri2',], trisL0,
+                ['tri3']];
+    } else if (dataName === 'seqTri12L') {
+        return 8;
+    }  else if (dataName === 'seqTri13'){
+           return [trisL0, ['empty'],trisL0, ['tri3'],  trisL1, ['tri3','tri2'],
+            trisL2, ['tri3','tri2', 'tri1'], trisL3, ['tri3','tri2', 'tri1', 'tri0'], 
+            trisL2, ['tri2','tri1', 'tri0'], trisL1, ['tri1','tri0'], trisL0,
+                ['tri0']];
+    } else if (dataName === 'seqTri13L') {
+        return 8;
     } else if (dataName === 'seqTri20') {//'Pmm', 'P4mm'
         return [trisL0, ['empty'],trisL0, ['tri0'], trisL1, ['tri0','tri1'],
             trisL2, ['tri0','tri1', 'tri2'],  trisL3, ['tri0','tri1', 'tri2', 'tri3'],
