@@ -913,7 +913,7 @@ function groupData(groupName, figureName, dataName) {
         p2Y = lengthB - lengthA + sin(-PI/16)*margiN/sin(PI/8);
         q2X = lengthB;
         q2Y = 0+sqrt(2)*margiN ;
-        r2X = lengthA + lengthB + cos(-13*PI/16)*margiN/sin(PI/16);
+        r2X = lengthA + lengthB + cos(-13*PI/16)*margiN/sin(PI/16) ;
         r2Y = lengthA + sin(-13*PI/16)*margiN/sin(PI/16);
         //data of tri3
         p3X = lengthB + margiN/tan(PI/8);
