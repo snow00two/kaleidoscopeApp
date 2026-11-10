@@ -8,7 +8,7 @@ let centerX = widthCanvas / 2;
 let centerY = heightCanvas / 2;
 const BACK_COLOR = 255;//
 const BACK_COLOR_1 = 0;
-const FRONT_COLOR_0 = [255,  0, 0];
+const FRONT_COLOR_0 = [255,  0, 0];//color of ball 1
 const FRONT_COLOR_1 = [220, 50, 0];
 const FRONT_COLOR_2 = [185, 100, 0];
 const FRONT_COLOR_3 = [170, 150, 120];
@@ -16,7 +16,7 @@ const FRONT_COLOR_4 = [180, 180, 160];
 const FRONT_COLOR_5 = [150, 170, 120];
 const FRONT_COLOR_6 = [100, 185, 0];
 const FRONT_COLOR_7 = [50, 220, 0];
-const FRONT_COLOR_8 = [0, 255, 80];
+const FRONT_COLOR_8 = [0, 255, 80];//color of ball 2
 const COLOR_LIST = [FRONT_COLOR_0, FRONT_COLOR_1, FRONT_COLOR_2,FRONT_COLOR_3, 
     FRONT_COLOR_4, FRONT_COLOR_5, FRONT_COLOR_6, FRONT_COLOR_7, FRONT_COLOR_8];
 const GROUP_LIST =['D8','Pmm', 'P3mm', 'P4mm', 'P6mm'];
