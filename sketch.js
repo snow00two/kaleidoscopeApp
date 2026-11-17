@@ -17,6 +17,16 @@ const FRONT_COLOR_5 = [25, 105, 137];//[50, 220, 0]
 const FRONT_COLOR_6 = [31, 142, 131];//[100, 185, 0]
 const FRONT_COLOR_7 = [40, 164, 74];//[150, 170, 120]
 const FRONT_COLOR_8 = [166, 206, 57];//[180, 180, 160]//color of ball 2
+// previous color set
+// const FRONT_COLOR_0 = [255,  0, 0];
+// const FRONT_COLOR_1 = [220, 50, 0];
+// const FRONT_COLOR_2 = [185, 100, 0];
+// const FRONT_COLOR_3 = [170, 150, 120];
+// const FRONT_COLOR_4 = [180, 180, 160];
+// const FRONT_COLOR_5 = [150, 170, 120];
+// const FRONT_COLOR_6 = [100, 185, 0];
+// const FRONT_COLOR_7 = [50, 220, 0];
+// const FRONT_COLOR_8 = [0, 255, 80];
 const COLOR_LIST = [FRONT_COLOR_0, FRONT_COLOR_1, FRONT_COLOR_2,FRONT_COLOR_3, 
     FRONT_COLOR_4, FRONT_COLOR_5, FRONT_COLOR_6, FRONT_COLOR_7, FRONT_COLOR_8];
 const GROUP_LIST =['D8','Pmm', 'P3mm', 'P4mm', 'P6mm'];
